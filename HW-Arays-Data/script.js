@@ -12,7 +12,7 @@ let getSortedInitials = () => {
     return splitNames.map((name) => name.charAt(0)).join(".");
   });
 
-  return initials;
+  return initials.sort();
 };
 
 //Task 2, firts method
@@ -61,23 +61,18 @@ let getConvertedObj = () => {
 let getDurationBetweenDates = (dateStart = "02 Aug 1985",dateEnd = "03 Aug 1985", dimension = "hours") => {	
   let dateStartTimestamp = Date.parse(dateStart);
   let dateEndTimestamp = Date.parse(dateEnd);
-  let timeDiference;
 
-  if (dateStartTimestamp < dateEndTimestamp) {
-    timeDiference = dateEndTimestamp - dateStartTimestamp;
-  } else {
-    timeDiference = dateStartTimestamp - dateEndTimestamp;
-  }
+  let timeDiference = Math.abs(dateStartTimestamp - dateEndTimestamp);
 
   switch (dimension) {
     case "seconds":
-      return `${timeDiference / 1000} seconds`;
+      return `${timeDiference / 1000} ${dimension}`;
 	case "minutes":
-		return `${timeDiference / 60000} minutes`
+		return `${timeDiference / 60000} ${dimension}`
 	case "hours":
-		return `${timeDiference / 3600000} hours`
+		return `${timeDiference / 3600000} ${dimension}`
 	case "days":
-		return `${timeDiference / 86400000} days`
+		return `${timeDiference / 86400000} ${dimension}`
 	default: return `Invalid dimension`
   }
 };
